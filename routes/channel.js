@@ -62,7 +62,8 @@ router.post('/create/',(req,res)=>{
               console.log(data.title ,'key :',hashed);
               createTable('table_' + result.insertId);
 
-              const data_to_push = {channel_id:result.insertId,channel_key:hashed,title:data.title}
+              var data_to_push = req.cookies.channel || [];
+              data_to_push.push({channel_id:result.insertId,channel_key:hashed,title:data.title})
               req.session.cookie.expires = false;
               res.cookie('channel',data_to_push,{ path: '/', maxAge: 31536000 });
 
@@ -78,6 +79,12 @@ router.post('/create/',(req,res)=>{
     
 
  
+})
+
+
+router.get('/clearCookie/',(req,res)=>{
+  res.clearCookie("channel");
+  res.json({msg:"success"})
 })
 
 
@@ -107,8 +114,6 @@ router.get('/:key',(req,res)=>{
   })
 
 })
-
-
 
 
 
