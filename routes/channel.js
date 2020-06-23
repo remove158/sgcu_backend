@@ -61,6 +61,11 @@ router.post('/create/',(req,res)=>{
             }else{
               console.log(data.title ,'key :',hashed);
               createTable('table_' + result.insertId);
+
+              const data_to_push = {channel_id:result.insertId,channel_key:hashed,title:data.title}
+              req.session.cookie.expires = false;
+              res.cookie('channel',data_to_push,{ path: '/', maxAge: 31536000 });
+
               res.json({success:true});
             }
             
