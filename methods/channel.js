@@ -21,7 +21,8 @@ const channel = sequelize.define('channel', {
       // allowNull defaults to true
     }
   }, {
-    // options
+    timestamps: false,
+
   });
   
 const addChannel = async (channel_key,title)=>{
@@ -49,15 +50,26 @@ const addChannel = async (channel_key,title)=>{
       allowNull: true
       // allowNull defaults to true
     },
+    createdAt:{
+      type:Sequelize.DATE
+    },
+    updatedAt:{
+      type:Sequelize.DATE
+    },
 
   }, {
-    // options
+    define: {
+      timestamps: true,
+      freezeTableName: true
+    }
   });
   table.sync({ force: true }).then(() => {
     // Now the `users` table in the database corresponds to the model definition
-    return ;
+    return  ;
     //table.destroy({where:{}})
+   
   });
+  
 
   return res.dataValues;
   
