@@ -3,29 +3,7 @@ const db = require('../config/db');
 const Sequelize = db.Sequelize;
 const sequelize = db.sequelize;
 
-const Vote = sequelize.define('vote', {
-        // attributes
-
-        vote_id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-
-        },
-        group_id: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        username: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        topic_id: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        }
-    }, {
-});
+const Vote = db.vote;
 
 const getVote = async () => {
     const res = await Vote.findAll()

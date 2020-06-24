@@ -4,7 +4,7 @@ const db = require('../config/db');
 var router = express.Router({ mergeParams: true })
 const ideate = require('../methods/ideate');
 /* methods */
-
+const io = require('../bin/www')
 
 
 /* GET home page. */
@@ -33,6 +33,7 @@ router.post('/:topic_id/group', async (req, res) => {
 
     if(status){   
         const result = await db.group.create({group:req.body.group,topic_id:req.params.topic_id})
+        io.io.emit(`/rooms/topic/${req.params.topic_id}`,{})
         res.json(result);
         res.end();
         res.status(200);

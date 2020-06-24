@@ -3,11 +3,29 @@
 <head>
   <title>Express</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <script src="http://127.0.0.1:3000/socket.io/socket.io.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <script>
+      $(()=>{
+        const  socket = io('localhost:3000');
+
+        socket.on(`/rooms/channel/1`,(dat)=>{
+          console.log(dat);
+          
+        });
+     
+
+  })
+    </script>
+
 </head>
 
 <body>
   <h1>Express</h1>
   <p>Welcome to Express</p>
+
+  <script src="./javascripts/script.js"></script>
 </body>
 
 </html>

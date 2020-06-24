@@ -9,6 +9,8 @@ const toppicRouter = require('./routes/topic');
 const ideateRouter = require('./routes/ideate');
 const groupingRouter = require('./routes/grouping');
 const editgroupRouter = require('./routes/edit_idea');
+const voteRouter = require('./routes/vote');
+const io = require('socket.io')
 const app = express();
 
 var session = require(`express-session`);
@@ -33,6 +35,7 @@ app.use('/channel', channelRouter);
 app.use('/channel', toppicRouter);
 app.use('/topic', ideateRouter);
 app.use('/topic', groupingRouter);
+app.use('/topic', voteRouter);
 app.use('/idea', editgroupRouter);
 
 

@@ -4,7 +4,7 @@ const db = require('../config/db');
 var router = express.Router({ mergeParams: true })
 const ideate = require('../methods/ideate');
 /* methods */
-
+const io = require('../bin/www')
 
 
 /* GET home page. */
@@ -18,6 +18,7 @@ router.put('/:idea_id', async (req, res) => {
     const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,topic_id);
     if(status){
+        io.io.emit(`/rooms/topic/${topic_id}`,{})
         const result = await db.idea.update({idea_group_id:req.body.idea_group_id},{where:{idea_id:req.params.idea_id}})
         res.json(result);
         res.status(200);

@@ -7,14 +7,19 @@ const session = require('express-session');
 const db = require('../config/db')
 const idea  = require('../config/db').idea;
 const ideate = require('../methods/ideate');
+const io = require('../bin/www')
 
 router.get("/:topic_id/idea",async (req,res)=>{
+
+
+
     const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
 
     if(status){
         const result = await idea.findAll({where:{topic_id:req.params.topic_id}});
-        res.json(result)
+        io.io.emit('5555',{})
+        res.json(result)        
         res.status(200);
     }else{
         res.status(404);
@@ -25,12 +30,13 @@ router.get("/:topic_id/idea",async (req,res)=>{
 
 
 router.post("/:topic_id/idea",async (req,res)=>{
-   
+    
     const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
     
     if(status){
         idea.create({idea:req.body.idea,topic_id:req.params.topic_id});
+        io.io.emit(`/rooms/topic/${req.params.topic_id}`,{})
         res.status(200);
         res.end();
         
@@ -41,12 +47,20 @@ router.post("/:topic_id/idea",async (req,res)=>{
 })
 
 router.put('/:topic_id', async (req, res) => {
+
+
     const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
     
     
     if(status){
+        var data = await db.topic.findOne({where:{topic_id:req.params.topic_id}});
+        const channel_id = data.dataValues.channel_id
         const result = await ideate.editTopicStatus(req.body.status, req.params.topic_id)
+        console.log(`/rooms/channel/${channel_id}`);
+        
+        io.io.emit(`/rooms/channel/${channel_id}`,{})
+        io.io.emit(`/rooms/topiv/${req.params.topic_id}`,{})
         res.json(result);
         res.status(200);
         res.end();

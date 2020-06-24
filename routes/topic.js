@@ -2,7 +2,7 @@
 var express = require('express');
 const db = require('../config/db');
 var router = express.Router({ mergeParams: true })
-
+const io = require('../bin/www')
 /* methods */
 
 const addTopic = require('../methods/topic').addTopic;
@@ -18,7 +18,10 @@ router.post('/:channel_id/topic', async (req, res) => {
     
     
     if(status.length != 0){
+        
         const result = await addTopic(req.body.topic, req.params.channel_id)
+        io.io.emit(`/rooms/channel/${req.params.channel_id}`)
+        
         res.json(result);
         res.end();
         res.status(200);

@@ -5,6 +5,7 @@ const db = require('../methods/channel');
 
 const bcrypt = require('bcrypt');
 const session = require('express-session');
+const io = require('../bin/www');
 
 /* GET home page. */
 
@@ -33,6 +34,7 @@ router.post('/',(req,res)=>{
       }
   })
 })
+ 
 })
 
 
