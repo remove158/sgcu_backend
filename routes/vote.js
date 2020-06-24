@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router({ mergeParams: true })
+const ideate = require('../methods/ideate');
 
 /* methods */
 
@@ -24,15 +25,27 @@ router.get('/:topic_id/vote', async (req, res) => {
 })
 
 router.post('/:topic_id/vote', async (req, res) => {
-    const result = await submitVote(req.params.topic_id, req.body.group_id, req.body.username)
-    if (result === 'Already') {
-        res.json('Already');
+    const channel_key = req.headers['channel-key'];
+    const status = await ideate.checkPermission(channel_key, req.params.topic_id);
+
+    if (status) {
+        const result = await submitVote(req.params.topic_id, req.body.group_id, req.body.username)
+        if (result === 'Already') {
+            res.json('Already');
+            res.end();
+        }
+        else {
+            res.json(result);
+            res.end();
+        }
+        res.status(200);
+        res.end();
+
+    } else {
+        res.status(404);
         res.end();
     }
-    else {
-        res.json(result);
-        res.end();
-    }
+    
     
 })
 
