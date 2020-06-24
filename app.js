@@ -1,12 +1,11 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var bodyParser = require('body-parser');
-var channelRouter = require('./routes/channel');
-var usersRouter = require('./routes/users');
-var sessionRouter = require('./routes/session');
-var app = express();
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
+const channelRouter = require('./routes/channel');
+
+const app = express();
 
 var session = require(`express-session`);
 app.use(express.json());
@@ -16,6 +15,7 @@ app.use(session({
   saveUninitialized: true
  })
 )
+
 app.use(logger('dev'));
 app.use(bodyParser());
 app.use(express.urlencoded({ extended: false }));
@@ -23,7 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/channel', channelRouter);
-app.use('/users', usersRouter);
-app.use('/session', sessionRouter);
+
+
 
 module.exports = app;
