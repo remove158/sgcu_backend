@@ -35,28 +35,14 @@ router.post('/create/',(req,res)=>{
 })
 })
 
-
-
-router.get('/bykey/:channel_key',async(req,res)=>{
- 
-  const result = await db.getChannel();
-
-  result.forEach(item=>{
- 
-    if(item.dataValues.channel_key === req.params.channel_key){
-      res.json(item.dataValues)
-      res.end();
-    }
-  })
-  res.status(404);
+router.get('/bykey/:channel_key', async (req, res)=>{
+  const result = await db.getChannelByKey(req.params.channel_key);
+  if (result !== null) {
+    res.json(result.dataValues);
+  } else {
+    res.status(404);
+  }
   res.end();
-  
-
 })
-
-
-
-
-
 
 module.exports = router;

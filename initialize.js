@@ -13,11 +13,11 @@ const db = require('./config/db');
     }
   }
 
-  await channel.sync({ force: true })
-  await topic.sync({ force: true })
-  await idea.sync({ force: true })
-  await group.sync({ force: true })
-  await vote.sync({ force: true })
+  await channel.sync()
+  await topic.sync()
+  await idea.sync()
+  await group.sync()
+  await vote.sync()
 })()
 
 function sleep(ms) {
