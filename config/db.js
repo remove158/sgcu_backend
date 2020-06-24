@@ -3,7 +3,7 @@ const Sequelize = require("sequelize")
 
 
 const sequelize  = new Sequelize('sgcu', 'root', '', {
-  host: 'localhost',
+  host: process.env.MYSQL_HOST || 'localhost',
   dialect:'mysql' ,
   define: {
     freezeTableName: true,

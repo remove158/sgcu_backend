@@ -1,0 +1,37 @@
+version: '3.2'
+
+services:
+  backend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: stormbrain-backend
+    container_name: backend
+    restart: unless-stopped
+    depends_on: 
+      - db
+    ports:
+      - '3000:3000'
+    environment:
+      MYSQL_HOST: db
+    networks:
+      - app
+  db:
+    image: mysql:5.7
+    container_name: db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: sgcu
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_PASSWORD: ''
+      MYSQL_USER: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - "./data/mysql:/var/lib/mysql"
+    networks:
+      - app
+networks:
+  app:
+    driver: bridge
