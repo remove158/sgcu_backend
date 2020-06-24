@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -11,6 +12,8 @@ const editgroupRouter = require('./routes/edit_idea');
 const app = express();
 
 var session = require(`express-session`);
+app.use(cors());
+app.options('*', cors());
 app.use(express.json());
 app.use(session({ 
   secret: `3 days ? really ?`, 
