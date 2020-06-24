@@ -1,3 +1,4 @@
+
 var express = require('express')
 var router = express.Router({ mergeParams: true })
 const ideate = require('../methods/ideate');
@@ -53,4 +54,3 @@ router.post('/:topic_id/vote', async (req, res) => {
     
 })
 
-module.exports = router
