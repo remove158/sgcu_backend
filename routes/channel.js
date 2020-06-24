@@ -14,9 +14,9 @@ router.post('/create/',(req,res)=>{
   const pwd = req.body.title
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(pwd, salt, async function(err, hash) {
-
       if(err) {
         console.log("password cannot undefine.");
+        res.status(404);
       }else{
         const data = req.body;   
         let hashed = "";
@@ -28,6 +28,7 @@ router.post('/create/',(req,res)=>{
         }
         
         const result = await db.addChannel(hashed,data.title);
+        res.status(200)
         res.send(result);
       }
   })
@@ -41,8 +42,7 @@ router.get('/bykey/:channel_key',async(req,res)=>{
   const result = await db.getChannel();
 
   result.forEach(item=>{
-
-    
+ 
     if(item.dataValues.channel_key === req.params.channel_key){
       res.json(item.dataValues)
       res.end();

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const channelRouter = require('./routes/channel');
+const toppicRouter = require('./routes/topic');
 const app = express();
 
 var session = require(`express-session`);
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/channel', channelRouter);
+app.use('/topic', toppicRouter);
 
 
 
