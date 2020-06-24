@@ -4,7 +4,6 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const channelRouter = require('./routes/channel');
-
 const app = express();
 
 var session = require(`express-session`);
