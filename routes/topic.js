@@ -1,3 +1,4 @@
+
 var express = require('express')
 var router = express.Router({ mergeParams: true })
 
@@ -35,4 +36,4 @@ router.put('/:topic_id', async (req, res) => {
     res.end();
 })
 
-module.exports = router
+module.exports = router;

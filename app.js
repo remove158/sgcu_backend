@@ -5,6 +5,7 @@ const logger = require('morgan');
 const bodyParser = require('body-parser');
 const channelRouter = require('./routes/channel');
 const toppicRouter = require('./routes/topic');
+const ideateRouter = require('./routes/ideate');
 const app = express();
 
 var session = require(`express-session`);
@@ -23,8 +24,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/channel', channelRouter);
-app.use('/topic', toppicRouter);
 
+app.use('/topic', toppicRouter);
+app.use('/topic', ideateRouter);
 
 
 module.exports = app;

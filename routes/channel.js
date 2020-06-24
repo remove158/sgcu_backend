@@ -10,7 +10,7 @@ const session = require('express-session');
 
 
 
-router.post('/create/',(req,res)=>{
+router.post('/',(req,res)=>{
   const pwd = req.body.title
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(pwd, salt, async function(err, hash) {
@@ -35,7 +35,9 @@ router.post('/create/',(req,res)=>{
 })
 })
 
-router.get('/bykey/:channel_key', async (req, res)=>{
+
+
+router.get('/bykey/:channel_key',async(req,res)=>{
   const result = await db.getChannelByKey(req.params.channel_key);
   if (result !== null) {
     res.json(result.dataValues);
@@ -44,5 +46,9 @@ router.get('/bykey/:channel_key', async (req, res)=>{
   }
   res.end();
 })
+
+
+
+
 
 module.exports = router;

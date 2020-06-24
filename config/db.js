@@ -35,8 +35,6 @@ const channel = sequelize.define('channel', {
 });
 
 
-
-
 const topic = sequelize.define(`topic`, {
   // attributes
 
@@ -73,6 +71,9 @@ const topic = sequelize.define(`topic`, {
   }
 });
 
+topic.belongsTo(channel, {
+  foreignKey: 'channel_id',
+});
 
 
 const idea = sequelize.define('idea', {
@@ -146,6 +147,19 @@ const vote = sequelize.define('vote', {
 });
 
 
+const checkPermission= async (channel_key,topic_id)=>{
 
 
-module.exports = {Sequelize,sequelize,channel,vote,idea,topic,group,channel};
+  const topics = await topic.findOne({ where: { topic_id }, include: channel })
+
+  
+  if(topics != null){
+    // console.log(topics.dataValues.channel.dataValues.channel_key,channel_key);
+    return  topics.dataValues.channel.dataValues.channel_key === channel_key || false;
+  } return false;
+
+ 
+}
+
+
+module.exports = {Sequelize,sequelize,channel,vote,idea,topic,group,channel,checkPermission};
