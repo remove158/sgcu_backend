@@ -3,50 +3,25 @@ const db = require('../config/db');
 const Sequelize = db.Sequelize;
 const sequelize = db.sequelize;
 
-const Vote = sequelize.define('vote', {
-        // attributes
-
-        vote_id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-
-        },
-        group_id: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        },
-        username: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        topic_id: {
-            type: Sequelize.INTEGER,
-            allowNull: false
-        }
-    }, {
-});
-
-const getVote = async () => {
-    const res = await Vote.findAll()
+const Vote = db.vote
+const getVote = async (topic_id) => {
+    const res = await Vote.findAll({ where: { topic_id: topic_id } })
     return res
 }
 
-const submitVote = async (topic_id, group_id, username) => {
-    //const res = Vote.create({ group_id: group_id, username: username, topic_id, topic_id })
+const submitVote = async (topic_id, group_id, user_name) => {
     const check = await Vote.findAll({ where: { topic_id: topic_id } })
 
     let checkAlready = false
     for (let i = 0; i < check.length; i++) {
-        if (check[i].dataValues.username === username) {
+        if (check[i].dataValues.user_name === user_name) {
             checkAlready = true
         }
     }
     if (checkAlready === true) {
-        console.log(1)
         return 'Already'
     }
-    const res = await Vote.create({ topic_id: topic_id, group_id: group_id, username: username })
+    const res = await Vote.create({ topic_id: topic_id, group_id: group_id, user_name: user_name })
     return res
 }
 
