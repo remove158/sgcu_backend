@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const channelRouter = require('./routes/channel');
 const toppicRouter = require('./routes/topic');
 const ideateRouter = require('./routes/ideate');
+const groupingRouter = require('./routes/grouping');
+const editgroupRouter = require('./routes/edit_idea');
 const app = express();
 
 var session = require(`express-session`);
@@ -27,6 +29,8 @@ app.use('/channel', channelRouter);
 
 app.use('/channel', toppicRouter);
 app.use('/topic', ideateRouter);
+app.use('/topic', groupingRouter);
+app.use('/idea', editgroupRouter);
 
 
 module.exports = app;

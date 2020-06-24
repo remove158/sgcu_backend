@@ -127,7 +127,11 @@ const group = sequelize.define('group', {
 
 const vote = sequelize.define('vote', {
   // attributes
-
+  vote_id: {
+    type: Sequelize.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
   group_id: {
     type: Sequelize.INTEGER,
     allowNull:false
@@ -142,6 +146,7 @@ const vote = sequelize.define('vote', {
       // allowNull defaults to true
     },    
 }, {
+  
   timestamps: false,
 
 });

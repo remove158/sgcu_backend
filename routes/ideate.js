@@ -1,12 +1,12 @@
 
 const express = require('express');
 const router = express.Router({mergeParams: true});
-const ideate = require('../methods/ideate');
+
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const db = require('../config/db')
 const idea  = require('../config/db').idea;
-
+const ideate = require('../methods/ideate');
 
 router.get("/:topic_id/idea",async (req,res)=>{
     const channel_key = req.headers['channel-key'];
@@ -43,7 +43,6 @@ router.post("/:topic_id/idea",async (req,res)=>{
 router.put('/:topic_id', async (req, res) => {
     const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
-    
     
     
     if(status){
