@@ -3,47 +3,7 @@ const db = require('../config/db');
 const Sequelize = db.Sequelize;
 const sequelize = db.sequelize;
 
-const Topic = sequelize.define('topic', {
-        // attributes
-
-        topic_id: {
-            type: Sequelize.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
-
-        },
-        topic: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        status: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
-        win_group_id: {
-            type: Sequelize.INTEGER,
-            allowNull: true
-        },
-        createAt: {
-            //type: Sequelize.DATE
-            type: 'TIMESTAMP',
-            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        },
-        updateAt: {
-           // type: Sequelize.DATE
-            type: 'TIMESTAMP',
-            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
-        },
-        channel_id: {
-            type: Sequelize.INTEGER,
-            allowNull: true
-        }
-    }, {
-        define: {
-            timestamps: true,
-            freezeTableName: true
-        }
-    });
+const Topic = db.topic;
 
 const getTopic = async () => {
     const res = await Topic.findAll()

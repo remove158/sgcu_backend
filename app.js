@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/channel', channelRouter);
 
-app.use('/topic', toppicRouter);
+app.use('/channel', toppicRouter);
 app.use('/topic', ideateRouter);
 
 

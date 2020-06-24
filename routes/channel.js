@@ -41,6 +41,7 @@ router.get('/bykey/:channel_key',async(req,res)=>{
   const result = await db.getChannelByKey(req.params.channel_key);
   if (result !== null) {
     res.json(result.dataValues);
+    res.status(200)
   } else {
     res.status(404);
   }
