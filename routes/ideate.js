@@ -9,7 +9,7 @@ const idea  = require('../config/db').idea;
 
 
 router.get("/:topic_id/idea",async (req,res)=>{
-    const channel_key = req.headers.channel_key;
+    const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
 
     if(status){
@@ -26,7 +26,7 @@ router.get("/:topic_id/idea",async (req,res)=>{
 
 router.post("/:topic_id/idea",async (req,res)=>{
    
-    const channel_key = req.headers.channel_key;
+    const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
     
     if(status){
@@ -41,10 +41,9 @@ router.post("/:topic_id/idea",async (req,res)=>{
 })
 
 router.put('/:topic_id', async (req, res) => {
-    const channel_key = req.headers.channel_key;
+    const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
     
-    console.log(status);
     
     
     if(status){

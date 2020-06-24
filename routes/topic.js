@@ -6,13 +6,12 @@ var router = express.Router({ mergeParams: true })
 /* methods */
 
 const addTopic = require('../methods/topic').addTopic;
-const editTopicStatus = require('../methods/topic').editTopicStatus;
 const getTopic = require('../methods/topic').getTopic;
 
 /* GET home page. */
 
 router.post('/:channel_id/topic', async (req, res) => {
-    const channel_key = req.headers.channel_key || "dont have";
+    const channel_key = req.headers['channel-key'] || "dont have";
     
     const status = await db.channel.findAll({where:{channel_id:req.params.channel_id,channel_key}})
     
@@ -32,7 +31,7 @@ router.post('/:channel_id/topic', async (req, res) => {
 
 router.get('/:channel_id/topic', async (req, res) => {
 
-    const channel_key = req.headers.channel_key || "dont have";
+    const channel_key = req.headers['channel-key'] || "dont have";
     
     const status = await db.channel.findAll({where:{channel_id:req.params.channel_id,channel_key}})
     
@@ -58,24 +57,5 @@ router.get('/:channel_id/topic', async (req, res) => {
 })
 
 
-router.put('/:topic_id', async (req, res) => {
-    const channel_key = req.headers.channel_key || "dont have";
-    
-    const status = await db.channel.findAll({where:{channel_id:req.params.channel_id,channel_key}})
-    
-    
-    
-    if(status.length != 0){
-        const result = await editTopicStatus(req.body.status, req.params.topic_id)
-    res.json(result);
-    res.status(200);
-    res.end();
-    }else{
-        res.status(404);
-        res.end();
-    }
-    
-    
-})
 
 module.exports = router;

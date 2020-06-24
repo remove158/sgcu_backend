@@ -6,6 +6,7 @@ const sequelize = db.sequelize;
 const Topic = db.topic;
 
 const getTopic = async () => {
+
     const res = await Topic.findAll()
     return res
 }
@@ -16,12 +17,6 @@ const addTopic = async (topic, channel_id) => {
     return result
 }
 
-const editTopicStatus = async (status, topic_id) => {
-    await Topic.update(
-        { status: status },
-        { where: { topic_id: topic_id } })
-    const res = await Topic.findOne({ where: { topic_id: topic_id } })
-    return res
-}
 
-module.exports = { addTopic, editTopicStatus, getTopic };
+
+module.exports = { addTopic, getTopic };
