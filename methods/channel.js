@@ -24,12 +24,43 @@ const channel = sequelize.define('channel', {
     // options
   });
   
-  const addChannel = async (channel_key,title)=>{
+const addChannel = async (channel_key,title)=>{
+
+  const res = await channel.create({channel_key,title})
   
-    const res = await channel.create({channel_key,title})
+  const table = sequelize.define(`table_${res.dataValues.channel_id}`, {
+    // attributes
   
-    return res.dataValues;
-    
+    topic_id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    topic: {
+      type: Sequelize.STRING,
+      allowNull: false
+    },
+    status: {
+      type: Sequelize.STRING,
+      allowNull: true
+      // allowNull defaults to true
+    },win_group_id: {
+      type: Sequelize.INTEGER,
+      allowNull: true
+      // allowNull defaults to true
+    },
+
+  }, {
+    // options
+  });
+  table.sync({ force: true }).then(() => {
+    // Now the `users` table in the database corresponds to the model definition
+    return ;
+    //table.destroy({where:{}})
+  });
+
+  return res.dataValues;
+  
   }
   
   
