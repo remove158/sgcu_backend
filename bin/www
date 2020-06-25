@@ -21,6 +21,7 @@ app.set('port', port);
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 io.on('connection', socket => {
+
   socket.on('join', roomName => {
     socket.join(roomName)
   })

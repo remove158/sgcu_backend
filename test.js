@@ -1,6 +1,6 @@
-let = [1,2,3]
+let values = 0.6666
+let test='(' + (values*100).toString().split('.')[0] + '%' +')'
 
-console.log(ls.find(1));
-
+console.log(test);
 
 

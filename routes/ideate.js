@@ -18,7 +18,7 @@ router.get("/:topic_id/idea",async (req,res)=>{
 
     if(status){
         const result = await idea.findAll({where:{topic_id:req.params.topic_id}});
-        io.io.emit('5555',{})
+        // io.io.emit('5555',{})
         res.json(result)        
         res.status(200);
     }else{
