@@ -89,7 +89,7 @@ router.post('/:topic_id/finish', async (req, res) => {
         db.group.findOne({where:{group_id:group_id_max}}).then(async(winner_detail)=>{
                 console.log(winner_detail.dataValues,winner_detail.dataValues.group);
                 
-            await db.topic.update({win_group_title:(winner_detail.dataValues.group + ' ' + percents),status:"done"},{where:{topic_id:req.params.topic_id}})
+            await db.topic.update({win_group_title:(winner_detail.dataValues.group + ' ' + percents),status:"Done"},{where:{topic_id:req.params.topic_id}})
         })
         console.log(`/rooms/topic/${req.params.topic_id}`);
         
