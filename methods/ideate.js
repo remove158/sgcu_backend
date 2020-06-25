@@ -13,6 +13,7 @@ const editTopicStatus = async (status, topic_id) => {
         { where: { topic_id: topic_id } })
     const res = await  db.topic.findOne({ where: { topic_id: topic_id } })
     return res
+
 }
 
 module.exports = {checkPermission,editTopicStatus}

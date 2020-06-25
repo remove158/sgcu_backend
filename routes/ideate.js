@@ -36,7 +36,7 @@ router.post("/:topic_id/idea",async (req,res)=>{
     
     if(status){
         idea.create({idea:req.body.idea,topic_id:req.params.topic_id});
-        io.io.emit(`/rooms/topic/${req.params.topic_id}`,{})
+        io.io.to(`/rooms/topic/${req.params.topic_id}`).emit('change',{collection:"idea"})
         res.status(200);
         res.end();
         
@@ -59,9 +59,8 @@ router.put('/:topic_id', async (req, res) => {
         const result = await ideate.editTopicStatus(req.body.status, req.params.topic_id)
         console.log(`/rooms/channel/${channel_id}`);
         
-        io.io.emit(`/rooms/channel/${channel_id}`,{})
-        io.io.emit(`/rooms/topiv/${req.params.topic_id}`,{})
-        res.json(result);
+        io.io.to(`/rooms/channel/${channel_id}`).emit('change',{collection:"topic"})
+         res.json(result);
         res.status(200);
         res.end();
     }else{

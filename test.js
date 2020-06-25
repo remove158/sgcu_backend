@@ -1,4 +1,6 @@
-const hash = "2b10$67WZEQFu.bPjvB3Kg0jOOJA7cu2DgJ5nBR.j0qTZJBCGpHT5fG2".replaceAll(".","");
-console.log(1);
+let = [1,2,3]
 
-console.log(hash);
+console.log(ls.find(1));
+
+
+

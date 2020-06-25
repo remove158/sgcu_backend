@@ -33,7 +33,7 @@ router.post('/:topic_id/group', async (req, res) => {
 
     if(status){   
         const result = await db.group.create({group:req.body.group,topic_id:req.params.topic_id})
-        io.io.emit(`/rooms/topic/${req.params.topic_id}`,{})
+        io.io.to(`/rooms/topic/${req.params.topic_id}`).emit('change',{collection:"group"})
         res.json(result);
         res.end();
         res.status(200);

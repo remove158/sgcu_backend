@@ -20,7 +20,7 @@ router.post('/:channel_id/topic', async (req, res) => {
     if(status.length != 0){
         
         const result = await addTopic(req.body.topic, req.params.channel_id)
-        io.io.emit(`/rooms/channel/${req.params.channel_id}`)
+        io.io.to(`/rooms/channel/${req.params.channel_id}`).emit('change',{collection:"topic"})
         
         res.json(result);
         res.end();

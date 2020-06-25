@@ -20,8 +20,14 @@ app.set('port', port);
  */
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
-
- 
+io.on('connection', socket => {
+  socket.on('join', roomName => {
+    socket.join(roomName)
+  })
+  socket.on('leave', roomName => {
+    socket.leave(roomName)
+  })
+})
 
 /**
  * Listen on provided port, on all network interfaces.
@@ -93,3 +99,4 @@ function onListening() {
 
 
 exports.io = io;
+

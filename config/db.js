@@ -49,8 +49,8 @@ const topic = sequelize.define(`topic`, {
   },
   status: {
     type: Sequelize.STRING,
-  },win_group_id: {
-    type: Sequelize.INTEGER,
+  },win_group_title: {
+    type: Sequelize.STRING,
     // allowNull defaults to true
   },
   createdAt:{

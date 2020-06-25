@@ -9,8 +9,8 @@
     <script>
       $(()=>{
         const  socket = io('localhost:3000');
-
-        socket.on(`/rooms/channel/1`,(dat)=>{
+        socket.emit('join', '/rooms/topic/1');
+        socket.on(`change`,(dat)=>{
           console.log(dat);
           
         });
