@@ -93,7 +93,7 @@ router.post('/:topic_id/finish', async (req, res) => {
         })
         console.log(`/rooms/topic/${req.params.topic_id}`);
         
-        io.io.to(`/rooms/topic/${req.params.topic_id}`).emit('change',{collection:"exit"})
+        io.io.to(`/rooms/topic/${req.params.topic_id}`).emit('exit',{})
         res.status(200);
         res.end();
 
