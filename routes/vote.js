@@ -54,3 +54,4 @@ router.post('/:topic_id/vote', async (req, res) => {
     
 })
 
+module.exports = router
