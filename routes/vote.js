@@ -70,7 +70,7 @@ router.post('/:topic_id/finish', async (req, res) => {
             }else{
                 votes[vote.group_id]=1
             }
-            x
+            
         });
         let ls = Object.keys(votes);
         let group_id_max =ls[0];
