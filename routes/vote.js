@@ -35,7 +35,7 @@ router.post('/:topic_id/vote', async (req, res) => {
     const status = await ideate.checkPermission(channel_key, req.params.topic_id);
 
     if (status) {
-        const result = await submitVote(req.params.topic_id, req.body.group_id, req.body.username)
+        const result = await submitVote(req.params.topic_id, req.body.group_id, req.body.user_name)
         if (result === 'Already') {
             res.json('Already');
             res.end();
@@ -70,7 +70,7 @@ router.post('/:topic_id/finish', async (req, res) => {
             }else{
                 votes[vote.group_id]=1
             }
-            
+            x
         });
         let ls = Object.keys(votes);
         let group_id_max =ls[0];

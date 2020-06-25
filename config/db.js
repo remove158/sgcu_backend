@@ -96,7 +96,11 @@ const idea = sequelize.define('idea', {
       type: Sequelize.INTEGER,
       allowNull:false
       // allowNull defaults to true
-    },    
+    },
+  user_name:{
+      type: Sequelize.STRING,
+      allowNull:false
+  },
 }, {
   timestamps: false,
 });
