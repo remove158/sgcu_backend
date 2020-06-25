@@ -18,8 +18,8 @@ router.put('/:idea_id', async (req, res) => {
     const channel_key = req.headers['channel-key'];
     const status = await ideate.checkPermission(channel_key,topic_id);
     if(status){
-        io.io.to(`/rooms/topic/${topic_id}`).emit('change',{collection:"idea"})
         const result = await db.idea.update({idea_group_id:req.body.idea_group_id},{where:{idea_id:req.params.idea_id}})
+        io.io.to(`/rooms/topic/${topic_id}`).emit('change',{collection:"idea"})
         res.json(result);
         res.status(200);
         res.end();

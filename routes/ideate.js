@@ -35,7 +35,7 @@ router.post("/:topic_id/idea",async (req,res)=>{
     const status = await ideate.checkPermission(channel_key,req.params.topic_id);
     
     if(status){
-        idea.create({idea:req.body.idea,topic_id:req.params.topic_id});
+        await idea.create({idea:req.body.idea,topic_id:req.params.topic_id});
         io.io.to(`/rooms/topic/${req.params.topic_id}`).emit('change',{collection:"idea"})
         res.status(200);
         res.end();

@@ -86,7 +86,7 @@ router.post('/:topic_id/finish', async (req, res) => {
         let percents = '(' + ( (votes[group_id_max]) / sum*100).toString().split('.')[0] + '%' +')'
         console.log(votes,"winner is :",group_id_max,percents);
 
-        db.group.findOne({where:{group_id:group_id_max}}).then(async(winner_detail)=>{
+        await db.group.findOne({where:{group_id:group_id_max}}).then(async(winner_detail)=>{
                 console.log(winner_detail.dataValues,winner_detail.dataValues.group);
                 
             await db.topic.update({win_group_title:(winner_detail.dataValues.group + ' ' + percents),status:"Done"},{where:{topic_id:req.params.topic_id}})
