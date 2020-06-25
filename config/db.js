@@ -1,9 +1,12 @@
 const Sequelize = require("sequelize")
 
+const dbHost = process.env.MYSQL_HOST || 'localhost'
+const dbName = process.env.MYSQL_DATABASE || 'sgcu'
+const dbUser = process.env.MYSQL_USER || 'root'
+const dbPass = process.env.MYSQL_PASS || ''
 
-
-const sequelize  = new Sequelize('sgcu', 'root', '', {
-  host: process.env.MYSQL_HOST || 'localhost',
+const sequelize  = new Sequelize(dbName, dbUser, dbPass, {
+  host: dbHost,
   dialect:'mysql' ,
   define: {
     freezeTableName: true,
